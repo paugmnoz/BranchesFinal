@@ -9,33 +9,28 @@ public class Champinon implements Runnable {
 	private PImage champUno, champDos;
 	private int champ;
 	private float desfase;
+	private Mundo m;
 
-	public Champinon(float x, float y) {
+	public Champinon(Mundo m, float x, float y) {
 		this.x = x;
 		this.y = y;
-		champ = (int) (1+Math.random()*2);
-		desfase = (float) (-20+Math.random()*80);
+		this.m = m;
+		champ = (int) (1 + Math.random() * 2);
+		desfase = (float) (-20 + Math.random() * 80);
+		cargar();
 	}
 
-	public void cargar(PApplet app) {
-		this.app = app;
-		switch (champ) {
-		case 1:
-			champUno = app.loadImage("../data/PantallaArbol/champUno.png");
-			break;
-		case 2:
-			champDos = app.loadImage("../data/PantallaArbol/champDos.png");
-			break;
-		}
-	}
+	/*
+	 * Método que contendrá el hilo de la caida de los champiñones
+	 */
 
-	public void cargarChampUno(PApplet app) {
+	public void run() {
 
 	}
 
-	public void cargarDos(PApplet app) {
-		this.app = app;
-
+	public void cargar() {
+		champUno = m.getCargar().getChampUno();
+		champDos = m.getCargar().getChampDos();
 	}
 
 	/*
@@ -51,11 +46,6 @@ public class Champinon implements Runnable {
 			app.image(champDos, x, y, 50, 50);
 			break;
 		}
-	}
-
-	public void pintarChampDos(PApplet app) {
-		this.app = app;
-		app.image(champDos, x, y);
 	}
 
 	/*
@@ -77,14 +67,6 @@ public class Champinon implements Runnable {
 	}
 
 	/*
-	 * Método que contendrá el hilo de la caida de los champiñones
-	 */
-
-	public void run() {
-
-	}
-
-	/*
 	 * Método que se encargará de animar la caida de los champiñones una vez el
 	 * usuario empiece a interactuar en la pantalla
 	 */
@@ -92,7 +74,7 @@ public class Champinon implements Runnable {
 
 	}
 
-	//GETTERS Y SETTERS
+	// GETTERS Y SETTERS
 	public float getX() {
 		return x;
 	}
@@ -108,7 +90,5 @@ public class Champinon implements Runnable {
 	public void setY(float y) {
 		this.y = y;
 	}
-	
 
 }
-

@@ -16,12 +16,13 @@ public class Calaverita implements Runnable {
 		this.m = m;
 		this.x =x;
 		this.y = y;
+		cargarCalaverita();
 	}
 
-	public void cargarCalaverita(PApplet app) {
-		this.app = app;
-	//	c = app.loadImage("../data/Calavera_Prueba.png");
+	public void cargarCalaverita() {
+	 //  c = app.loadImage("../data/Calavera_Prueba.png");
 	}
+	
 	/*
 	 * Metodo que cargara con un for las imagenes para la animacion de cuando se
 	 * abre la puertapara cambiar de pantalla

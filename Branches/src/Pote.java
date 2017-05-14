@@ -1,26 +1,26 @@
 import processing.core.PApplet;
 import processing.core.PImage;
 
-
 public class Pote {
 
 	private PApplet app;
 	private PImage pote;
 	private float x, y;
+	private Mundo m;
 
-	public Pote() {
-
+	public Pote(Mundo m) {
+		this.m = m;
+		cargar();
 	}
 
 	/*
 	 * Método que nos pintara el pote
 	 */
 
-	public void cargar(PApplet app) {
-		this.app = app;
-		x = app.width / 2;
-		y = app.height / 2;
-		pote = app.loadImage("../data/PantallaArbol/pote.png");
+	public void cargar() {
+		x = 960;
+		y = 540;
+		pote = m.getCargar().getPote();
 	}
 
 	public void pintar(PApplet app) {
@@ -33,16 +33,16 @@ public class Pote {
 	 */
 	public void mover() {
 		if (app.keyCode == app.RIGHT) {
-			x+=5;
+			x += 5;
 		}
 		if (app.keyCode == app.LEFT) {
-			x-=5;
+			x -= 5;
 		}
 		if (app.keyCode == app.UP) {
-			y-=5;
+			y -= 5;
 		}
 		if (app.keyCode == app.DOWN) {
-			y+=5;
+			y += 5;
 		}
 	}
 
@@ -52,8 +52,8 @@ public class Pote {
 	public void inclinar(PApplet app) {
 
 	}
-	
-	//GETTERS Y SETTERS
+
+	// GETTERS Y SETTERS
 	public PImage getPote() {
 		return pote;
 	}
@@ -78,5 +78,5 @@ public class Pote {
 		this.y = y;
 	}
 
-	//FINAL DE LA CLASE POTE
+	// FINAL DE LA CLASE POTE
 }

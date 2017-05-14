@@ -16,7 +16,8 @@ public class Foto implements Runnable {
 		this.y = y;
 		this.tam = tam;
 		this.m = m;
-		llave = new Llave(m, 802, 547, 30);
+		//llave = new Llave(m, 802, 547, 30);
+		cargarImagen();
 	}
 	
 	@Override
@@ -25,18 +26,16 @@ public class Foto implements Runnable {
 		
 	}
 	
-	public void cargarImagen(PApplet app){
-		this.app = app;
-		fondo = app.loadImage("../data/PantallaFotos/fondo.png");
-		fotoUno = app.loadImage("../data/PantallaFotos/fotoUno.png");
-		fotoDos = app.loadImage("../data/PantallaFotos/fotoDos.png");
-		fotoTres = app.loadImage("../data/PantallaFotos/fotoTres.png");
-		fotoCuatro = app.loadImage("../data/PantallaFotos/fotoCuatro.png");
-		fotoCinco = app.loadImage("../data/PantallaFotos/fotoCinco.png");
-		fotoSeis = app.loadImage("../data/PantallaFotos/fotoSeis.png");
-		fotoSiete = app.loadImage("../data/PantallaFotos/fotoSiete.png");
-		fotoOcho = app.loadImage("../data/PantallaFotos/fotoOcho.png");
-		llave.cargar(app);
+	public void cargarImagen(){
+		fondo = m.getCargar().getFondo();
+		fotoUno = m.getCargar().getFotoUno();
+		fotoDos = m.getCargar().getFotoDos();
+		fotoTres = m.getCargar().getFotoTres();
+		fotoCuatro = m.getCargar().getFotoCuatro();
+		fotoCinco = m.getCargar().getFotoCinco();
+		fotoSeis = m.getCargar().getFotoSeis();
+		fotoSiete = m.getCargar().getFotoSiete();
+		fotoOcho = m.getCargar().getFotoOcho();
 	}
 	
 
@@ -44,7 +43,7 @@ public class Foto implements Runnable {
 		this.app = app;
 		app.image(fondo, app.width/2, app.height/2);
 		app.image(fotoUno, app.width/2, app.height/2);
-		llave.pintar(app);
+		//llave.pintar(app);
 		app.image(fotoDos, app.width/2, app.height/2);
 		app.image(fotoTres, app.width/2, app.height/2);
 		if(!encontroLlave){

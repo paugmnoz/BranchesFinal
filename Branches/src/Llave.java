@@ -11,6 +11,7 @@ public class Llave implements Runnable {
 	public Llave(Mundo m, float x, float y, float tam) {
 		this.x = x;
 		this.y = y;
+		cargar();
 	}
 
 	@Override
@@ -19,9 +20,8 @@ public class Llave implements Runnable {
 
 	}
 
-	public void cargar(PApplet app) {
-		this.app = app;
-		llave = app.loadImage("../data/PantallaFotos/llave.png");
+	public void cargar() {
+		llave = m.getCargar().getLlave();
 	}
 
 	/*

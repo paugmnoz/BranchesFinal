@@ -4,7 +4,7 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;
 
-public class Mundo implements Runnable {
+public class Mundo {
 
 	private boolean moverC, abrirC, champinonPrin, libreta, lis;
 	private int pantalla, numFrame, numFrameA, numFrameAbrir, numFrameAC, numFramePuerta;
@@ -13,13 +13,14 @@ public class Mundo implements Runnable {
 	private Libreta lib;
 	private Lis liss;
 	private ChampinonPrin champPrin;
-
+	private Cargar cargar;
+	private Cajon cajonClase;
+	private Thread capsulaCajonClase;
 	private Foto fotos;
 	private Pote pote;
 	private SelectorChamp selectorChamp;
 	private ArrayList<Champinon> champ;
 	private int contarChamps;
-
 	private ArrayList<Calaverita> calaveritas;
 	// para pre entrega
 	int eX = 964, eY = 297;
@@ -30,59 +31,45 @@ public class Mundo implements Runnable {
 
 	public Mundo(PApplet app) {
 		this.app = app;
-		inicializarVariables(app);
+		inicializarVariables();
 		cargarImagenes();
 	}
 
-	public void inicializarVariables(PApplet app) {
+	public void inicializarVariables() {
 		lis = false;
 		libreta = false;
 		champinonPrin = false;
-		// Nuevo
+		cargar = new Cargar(app);
 		fotos = new Foto(this, 0, 0, 30);
-		pote = new Pote();
+		pote = new Pote(this);
 		champ = new ArrayList<Champinon>();
-		for (int i = 0; i < 1000; i++) {
-			champ.add(new Champinon((float) Math.random() * app.width,
-					(float) ((app.height / 2 + 200) + Math.random() * app.height)));
-		}
 		selectorChamp = new SelectorChamp(this, app.mouseX, app.mouseY, 150);
-		// Nuevo
 		liss = new Lis();
 		lib = new Libreta();
+		cajonClase = new Cajon(app, this);
+		capsulaCajonClase = new Thread(cajonClase);
+		capsulaCajonClase.start();
 		champPrin = new ChampinonPrin(app, app.width / 2 + 400, app.height / 2 - 50);
 		calaveritas = new ArrayList<Calaverita>();
 		numFrame = 0;
-
+		anadirChampinones();
+		pantalla = 0;
 	}
 
 	public void cargarImagenes() {
-		cargarCajonF();
-		cargarAbreCajon();
-		cargarCajonAbrir();
-		cargarAcercarCajon();
+		//cargarCajonF();
+		//cargarAbreCajon();
+		//cargarCajonAbrir();
+		//cargarAcercarCajon();
 		cargarFondo();
 		cargarKuleshov();
-		// Nuevo
-		cargarFotos();
-		cargarPantallaArbol();
-		// Nuevo
 	}
 
-	// Nuevo
-	public void cargarChamp() {
-		for (int i = 0; i < champ.size(); i++) {
-			champ.get(i).cargar(app);
-		}
-	}
-
-	public void cargarFotos() {
-		fotos.cargarImagen(app);
-	}
-
-	public void cargarPantallaArbol() {
-		pote.cargar(app);
-		cargarChamp();
+	public void anadirChampinones() {
+		//for (int i = 0; i < 1000; i++) {
+			//champ.add(new Champinon(this, (float) Math.random() * app.width,
+				//	(float) ((app.height / 2 + 200) + Math.random() * app.height)));
+		//}
 	}
 
 	public void recogerChampinones() {
@@ -92,108 +79,85 @@ public class Mundo implements Runnable {
 			}
 		}
 	}
-	// Nuevo
-	public void cargarCalaverita() {
-		for (int i = 0; i < calaveritas.size(); i++) {
-			calaveritas.get(i).cargarCalaverita(app);
-		}
-	}
 
 	public void cargarKuleshov() {
-		kuleshov = new PImage[1];
-		for (int i = 0; i < kuleshov.length; i++) {
-			kuleshov[i] = app.loadImage("../data/kuleshov_prueba_" + i + ".png");
-		}
-	}
-
-	public void cargarCajonAbrir() {
-		abrir = new PImage[12];
-		for (int i = 0; i < abrir.length; i++) {
-			abrir[i] = app.loadImage("../data/CajonAbrir/CajonAbrir_" + i + ".png");
-		}
-	}
-
-	public void cargarFondo() {
-		revUnoF = new PImage[8];
-		for (int i = 0; i < revUnoF.length; i++) {
-			revUnoF[i] = app.loadImage("../data/Revision1/rev1_" + i + ".png");
-
-		}
+		kuleshov = cargar.getKuleshov();
 	}
 
 	/*
-	 * Metodo que cargara con un for las imagenes para la animacion del arbol de
-	 * la pantalla principal, de inicio
-	 */
-	public void cargarCajonF() {
-		cajonFlotante = new PImage[30];
-		for (int i = 0; i < cajonFlotante.length; i++) {
-			cajonFlotante[i] = app.loadImage("../data/CajonFlotando/CajonFlotando_" + i + ".png");
+	public void cargarCajonAbrir() {
+		abrir = cargar.getAbrir();
+	}
+	*/
 
-		}
+	public void cargarFondo() {
+		revUnoF = cargar.getRevUnoF();
+	}
+
+	/*
+	public void cargarCajonF() {
+		cajonFlotante = cargar.getCajonFlotante();
 	}
 
 	public void cargarAbreCajon() {
-		abreCajon = new PImage[14];
-		for (int i = 0; i < abreCajon.length; i++) {
-			abreCajon[i] = app.loadImage("../data/AbreCajon/AbreCajon_" + i + ".png");
-		}
+		abreCajon = cargar.getAbreCajon();
 	}
 
 	public void cargarAcercarCajon() {
-		acercaCajon = new PImage[17];
-		System.out.println(app);
-		for (int i = 0; i < acercaCajon.length; i++) {
-			acercaCajon[i] = app.loadImage("../data/CajonAcercar/CajonAcercar_" + i + ".png");
-		}
+		acercaCajon = cargar.getAcercaCajon();
 	}
 
-	/*
-	 * Metodo que cargara con un for las imagenes para la animacion del arbol de
-	 * la pantalla de activación de la aplicación
-	 */
 	public void cargarMoverCajon() {
 
 	}
+	*/
 
 	/*
 	 * metodo para visualizar la aplicación
 	 */
 	public void pintar(PApplet app) {
 		pantallas(app);
+		System.out.println("Estado Capsula: " + capsulaCajonClase.getState());
 	}
 
 	public void pantallas(PApplet app) {
 		switch (pantalla) {
-
-		// --------Pantalla Mesa Flotanto----------//
+		// ------------PANTALLA DE CARGA---------//
 		case 0:
-			pintarCajonFlotante(app);
+			app.background(255);
+			app.text("Pantalla de carga", app.width/2, app.height/2);
 			break;
-
-		//
+		// --------PANTALLA MESA FLOTANDO----------//
 		case 1:
-			pintarAcercarCajon();
+			//pintarCajonFlotante(app);
+			cajonClase.pintarCajonFlotante();
 			break;
+		//
 		case 2:
+			//pintarAcercarCajon();
+			cajonClase.pintarAcercarCajon();
+			break;
+		case 3:
 
 			switch (cajon) {
 			case 0:
-				pintarAbrir();
+				cajonClase.pintarAbrir();
+				//pintarAbrir();
 				break;
 			case 1:
-				pintarAbrirCajon();
+				//pintarAbrirCajon();
+				cajonClase.pintarAbrirCajon();
 				if (numFrameAC >= 12) {
-					liss.pintar(app);
-					lib.pintar(app);
-					champPrin.pintar(app);
+					//liss.pintar(app);
+					//lib.pintar(app);
+					//champPrin.pintar(app);
 				}
 				break;
 			}
 
 			break;
 		// ------------------PANTALLA CALAVERITAS REV. UNO -------------------//
-		case 3:
+		case 4:
 			switch (revUno) {
 			case 0:
 				pintarFondo();
@@ -215,7 +179,7 @@ public class Mundo implements Runnable {
 			break;
 
 		// -----------------PANTALLA CHAMP. REV DOS----------------------//
-		case 4:
+		case 5:
 			for (int i = 0; i < champ.size(); i++) {
 				champ.get(i).pintar(app);
 			}
@@ -225,19 +189,19 @@ public class Mundo implements Runnable {
 			selectorChamp.remover();
 			break;
 		// -----------------------PANTALLA KULESHOV ------------------//
-		case 5:
+		case 6:
 			app.image(kuleshov[0], app.width / 2, app.height / 2);
 			break;
 		// ------------------PANTALLA FOTOS. REV TRES ------------------//
-		case 6:
+		case 7:
 			fotos.pintarImagen(app);
 			break;
 
 		// --------------PANTALLA CAJON-LLAVE. REV CUATRO -----------------//
-		case 7:
+		case 8:
 			break;
 
-		case 8:
+		case 9:
 			break;
 		}
 
@@ -334,50 +298,42 @@ public class Mundo implements Runnable {
 
 	}
 
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-
-	}
-
 	// -----------------------MAKEY MAKEY----------------------//
 
 	public void makey(PApplet app) {
 		System.out.println(tam);
-		if (pantalla == 0) {
-			iniciarApp(app);
-		} else if (pantalla == 1) {
+		if(pantalla == 0){
 			if (app.keyCode == 32) {
-				pantalla = 2;
+				pantalla = 1;
 			}
-		}
-
-		else if (pantalla == 2) {
-
-			if (app.keyCode == 87) {
-				cajon = 1;
-			} else if (app.keyCode == 32 && cajon == 1) {
-				cargarCalaverita();
-				agregarCalaveritas();
+		} else if (pantalla == 1) {
+			iniciarApp(app);
+		} else if (pantalla == 2) {
+			if (app.keyCode == 32) {
 				pantalla = 3;
-				numFrame = 0;
 			}
 		}
 
 		else if (pantalla == 3) {
 
-			if (app.keyCode == 32 && revUno == 1) {
+			if (app.keyCode == 87) {
+				cajon = 1;
+			} else if (app.keyCode == 32 && cajon == 1) {
+				agregarCalaveritas();
 				pantalla = 4;
+				numFrame = 0;
 			}
 		}
 
 		else if (pantalla == 4) {
-			pote.mover();
 
-			if (app.keyCode == 32) {
+			if (app.keyCode == 32 && revUno == 1) {
 				pantalla = 5;
 			}
-		} else if (pantalla == 5) {
+		}
+
+		else if (pantalla == 5) {
+			pote.mover();
 
 			if (app.keyCode == 32) {
 				pantalla = 6;
@@ -392,6 +348,11 @@ public class Mundo implements Runnable {
 			if (app.keyCode == 32) {
 				pantalla = 8;
 			}
+		} else if (pantalla == 8) {
+
+			if (app.keyCode == 32) {
+				pantalla = 9;
+			}
 		}
 	}
 
@@ -402,21 +363,23 @@ public class Mundo implements Runnable {
 	public void abrircajon() {
 
 	}
-	public void click(){
+
+	public void click() {
 		fotos.click(app);
 	}
+
 	/*
 	 * Metodo para cuando alguien toque el cajon, se cambie de pantalla y
 	 * empiece la interaccion
 	 */
 	public void iniciarApp(PApplet app) {
 		if (app.keyCode == 87) {
-			pantalla = 1;
+			pantalla = 2;
 			numFrame = 0;
 		}
 	}
 
-	//GETTERS Y SETTERS
+	// GETTERS Y SETTERS
 	public SelectorChamp getSelectorChamp() {
 		return selectorChamp;
 	}
@@ -432,7 +395,31 @@ public class Mundo implements Runnable {
 	public void setPote(Pote pote) {
 		this.pote = pote;
 	}
+
+	public Cargar getCargar() {
+		return cargar;
+	}
+
+	public void setCargar(Cargar cargar) {
+		this.cargar = cargar;
+	}
+
+	public int getPantalla() {
+		return pantalla;
+	}
+
+	public void setPantalla(int pantalla) {
+		this.pantalla = pantalla;
+	}
+
+	public int getCajon() {
+		return cajon;
+	}
+
+	public void setCajon(int cajon) {
+		this.cajon = cajon;
+	}
 	
-	//-------------FINAL DE LA CLASE MUNDO
+	//-------------FINAL DE LA CLASE MUNDO--------------//
 
 }
