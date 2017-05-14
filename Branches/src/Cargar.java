@@ -2,7 +2,7 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Cargar {
-
+//
 	private PApplet app;
 	private PImage cargarCalaverita;
 	private PImage [] kuleshov;

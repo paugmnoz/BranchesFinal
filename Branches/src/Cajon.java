@@ -2,7 +2,7 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Cajon implements Runnable {
-
+//
 	private PApplet app;
 	private Mundo m;
 	private int pantalla, cajon;

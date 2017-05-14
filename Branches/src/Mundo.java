@@ -5,7 +5,7 @@ import processing.core.PConstants;
 import processing.core.PImage;
 
 public class Mundo {
-
+//
 	private boolean moverC, abrirC, champinonPrin, libreta, lis;
 	private int pantalla, numFrame, numFrameA, numFrameAbrir, numFrameAC, numFramePuerta;
 	private int cajon, revUno;
