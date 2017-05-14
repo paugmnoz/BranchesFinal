@@ -1,6 +1,6 @@
 import processing.core.PApplet;
 import processing.core.PImage;
-//
+
 public class ChampinonPrin {
 	private PImage champ;
 	private float x, y;

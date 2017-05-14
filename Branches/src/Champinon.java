@@ -2,7 +2,7 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Champinon implements Runnable {
-//
+
 	private float x, y;
 	public boolean empezar;
 	private PApplet app;

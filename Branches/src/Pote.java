@@ -2,7 +2,7 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Pote {
-//
+
 	private PApplet app;
 	private PImage pote;
 	private float x, y;

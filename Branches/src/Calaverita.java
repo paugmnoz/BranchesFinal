@@ -3,7 +3,7 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Calaverita implements Runnable {
-//
+
 	private PImage[] cArray;
 	private PImage c;
 	private float x, y;

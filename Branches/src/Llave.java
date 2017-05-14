@@ -2,7 +2,7 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Llave implements Runnable {
-//
+
 	private float x, y;
 	private Mundo m;
 	private PApplet app;
