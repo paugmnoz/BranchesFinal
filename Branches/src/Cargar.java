@@ -11,7 +11,8 @@ public class Cargar extends Thread {
 	private int champ;
 	private boolean cargado;
 	// Pantalla Fotos
-	private PImage fondo, fotoUno, fotoDos, fotoTres, fotoCuatro, fotoCinco, fotoSeis, fotoSiete, fotoOcho, llave;
+	private PImage[] fotoUno, fotoDos, fotoTres, fotoCuatro, fotoCinco, fotoSeis, fotoSiete, fotoOcho;
+	private PImage fondo, llave;
 
 	public Cargar(PApplet app) {
 		this.app = app;
@@ -20,7 +21,6 @@ public class Cargar extends Thread {
 
 	public void run() {
 		try {
-			// while (vivo) {
 			sleep(15);
 			cargarKuleshov();
 			cargarCajonAbrir();
@@ -31,8 +31,6 @@ public class Cargar extends Thread {
 			cargarChampinones();
 			cargarPote();
 			cargarFotos();
-
-			// }
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -69,7 +67,6 @@ public class Cargar extends Thread {
 
 	public void cargarAcercarCajon() {
 		acercaCajon = new PImage[17];
-		System.out.println(app);
 		for (int i = 0; i < acercaCajon.length; i++) {
 			acercaCajon[i] = app.loadImage("../data/CajonAcercar/CajonAcercar_" + i + ".png");
 		}
@@ -98,14 +95,48 @@ public class Cargar extends Thread {
 	// -----------------PANTALLA FOTOS------------//
 	public void cargarFotos() {
 		fondo = app.loadImage("../data/PantallaFotos/fondo.png");
-		fotoUno = app.loadImage("../data/PantallaFotos/fotoUno.png");
-		fotoDos = app.loadImage("../data/PantallaFotos/fotoDos.png");
-		fotoTres = app.loadImage("../data/PantallaFotos/fotoTres.png");
-		fotoCuatro = app.loadImage("../data/PantallaFotos/fotoCuatro.png");
-		fotoCinco = app.loadImage("../data/PantallaFotos/fotoCinco.png");
-		fotoSeis = app.loadImage("../data/PantallaFotos/fotoSeis.png");
-		fotoSiete = app.loadImage("../data/PantallaFotos/fotoSiete.png");
-		fotoOcho = app.loadImage("../data/PantallaFotos/fotoOcho.png");
+		
+		// FOTO UNO
+		fotoUno = new PImage[6];
+		for (int i = 0; i < fotoUno.length; i++) {
+			fotoUno[i] = app.loadImage("../data/PantallaFotos/animacionesFotos/fotoUno/fotoUno_" + i + ".png");
+		}
+		// FOTO DOS
+		fotoDos = new PImage[9];
+		for (int i = 0; i < fotoDos.length; i++) {
+			fotoDos[i] = app.loadImage("../data/PantallaFotos/animacionesFotos/fotoDos/fotoDos_" + i + ".png");
+		}
+		// FOTO TRES
+		fotoTres = new PImage[5];
+		for (int i = 0; i < fotoTres.length; i++) {
+			fotoTres[i] = app.loadImage("../data/PantallaFotos/animacionesFotos/fotoTres/fotoTres_" + i + ".png");
+		}
+		// FOTO CUATRO
+		fotoCuatro = new PImage[14];
+		for (int i = 0; i < fotoCuatro.length; i++) {
+			fotoCuatro[i] = app.loadImage("../data/PantallaFotos/animacionesFotos/fotoCuatro/fotoCuatro_" + i + ".png");
+		}
+		// FOTO CINCO
+		fotoCinco = new PImage[6];
+		for (int i = 0; i < fotoCinco.length; i++) {
+			fotoCinco[i] = app.loadImage("../data/PantallaFotos/animacionesFotos/fotoCinco/fotoCinco_" + i + ".png");
+		}
+		// FOTO SEIS
+		fotoSeis = new PImage[7];
+		for (int i = 0; i < fotoSeis.length; i++) {
+			fotoSeis[i] = app.loadImage("../data/PantallaFotos/animacionesFotos/fotoSeis/fotoSeis_" + i + ".png");
+		}
+		// FOTO SIETE
+		fotoSiete = new PImage[8];
+		for (int i = 0; i < fotoSiete.length; i++) {
+			fotoSiete[i] = app.loadImage("../data/PantallaFotos/animacionesFotos/fotoSiete/fotoSiete_" + i + ".png");
+		}
+		// FOTO OCHO
+		fotoOcho = new PImage[8];
+		for (int i = 0; i < fotoOcho.length; i++) {
+			fotoOcho[i] = app.loadImage("../data/PantallaFotos/animacionesFotos/fotoOcho/fotoOcho_" + i + ".png");
+		}
+
 		llave = app.loadImage("../data/PantallaFotos/llave.png");
 		cargado = true;
 	}
@@ -199,70 +230,6 @@ public class Cargar extends Thread {
 		this.fondo = fondo;
 	}
 
-	public PImage getFotoUno() {
-		return fotoUno;
-	}
-
-	public void setFotoUno(PImage fotoUno) {
-		this.fotoUno = fotoUno;
-	}
-
-	public PImage getFotoDos() {
-		return fotoDos;
-	}
-
-	public void setFotoDos(PImage fotoDos) {
-		this.fotoDos = fotoDos;
-	}
-
-	public PImage getFotoTres() {
-		return fotoTres;
-	}
-
-	public void setFotoTres(PImage fotoTres) {
-		this.fotoTres = fotoTres;
-	}
-
-	public PImage getFotoCuatro() {
-		return fotoCuatro;
-	}
-
-	public void setFotoCuatro(PImage fotoCuatro) {
-		this.fotoCuatro = fotoCuatro;
-	}
-
-	public PImage getFotoCinco() {
-		return fotoCinco;
-	}
-
-	public void setFotoCinco(PImage fotoCinco) {
-		this.fotoCinco = fotoCinco;
-	}
-
-	public PImage getFotoSeis() {
-		return fotoSeis;
-	}
-
-	public void setFotoSeis(PImage fotoSeis) {
-		this.fotoSeis = fotoSeis;
-	}
-
-	public PImage getFotoSiete() {
-		return fotoSiete;
-	}
-
-	public void setFotoSiete(PImage fotoSiete) {
-		this.fotoSiete = fotoSiete;
-	}
-
-	public PImage getFotoOcho() {
-		return fotoOcho;
-	}
-
-	public void setFotoOcho(PImage fotoOcho) {
-		this.fotoOcho = fotoOcho;
-	}
-
 	public PImage getLlave() {
 		return llave;
 	}
@@ -302,7 +269,70 @@ public class Cargar extends Thread {
 	public void setPoteAdelante(PImage poteAdelante) {
 		this.poteAdelante = poteAdelante;
 	}
-	
+
+	public PImage[] getFotoUno() {
+		return fotoUno;
+	}
+
+	public void setFotoUno(PImage[] fotoUno) {
+		this.fotoUno = fotoUno;
+	}
+
+	public PImage[] getFotoDos() {
+		return fotoDos;
+	}
+
+	public void setFotoDos(PImage[] fotoDos) {
+		this.fotoDos = fotoDos;
+	}
+
+	public PImage[] getFotoTres() {
+		return fotoTres;
+	}
+
+	public void setFotoTres(PImage[] fotoTres) {
+		this.fotoTres = fotoTres;
+	}
+
+	public PImage[] getFotoCuatro() {
+		return fotoCuatro;
+	}
+
+	public void setFotoCuatro(PImage[] fotoCuatro) {
+		this.fotoCuatro = fotoCuatro;
+	}
+
+	public PImage[] getFotoCinco() {
+		return fotoCinco;
+	}
+
+	public void setFotoCinco(PImage[] fotoCinco) {
+		this.fotoCinco = fotoCinco;
+	}
+
+	public PImage[] getFotoSeis() {
+		return fotoSeis;
+	}
+
+	public void setFotoSeis(PImage[] fotoSeis) {
+		this.fotoSeis = fotoSeis;
+	}
+
+	public PImage[] getFotoSiete() {
+		return fotoSiete;
+	}
+
+	public void setFotoSiete(PImage[] fotoSiete) {
+		this.fotoSiete = fotoSiete;
+	}
+
+	public PImage[] getFotoOcho() {
+		return fotoOcho;
+	}
+
+	public void setFotoOcho(PImage[] fotoOcho) {
+		this.fotoOcho = fotoOcho;
+	}
 	
 
 	// --------------FINAL DE LA CLASE CARGAR------------//

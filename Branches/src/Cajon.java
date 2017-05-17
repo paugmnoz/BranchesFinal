@@ -114,8 +114,6 @@ public class Cajon extends Thread {
 
 	// ---------PINTAR-------//
 	public void pintarCajonFlotante() {
-		System.out.println("numFrame: " + numFrame);
-		System.out.println("Estado Cajon: " + cajonFlotante);
 		cajonFlotante = m.getCargar().getCajonFlotante();
 		app.image(cajonFlotante[numFrame], app.width / 2, app.height / 2);
 	}

@@ -40,10 +40,16 @@ public class Champinon implements Runnable {
 		this.app = app;
 		switch (champ) {
 		case 1:
-			app.image(champUno, x, y, 50, 50);
+			app.pushMatrix();
+			app.translate(x, y);
+			app.image(champUno, 0, 0, 50, 50);
+			app.popMatrix();
 			break;
 		case 2:
-			app.image(champDos, x, y, 50, 50);
+			app.pushMatrix();
+			app.translate(x, y);
+			app.image(champDos, 0, 0, 50, 50);
+			app.popMatrix();
 			break;
 		}
 	}
@@ -54,14 +60,21 @@ public class Champinon implements Runnable {
 	 * 
 	 */
 	public void pintar(PApplet app, float nuevaX, float nuevaY) {
+		this.app = app;
 		this.x = nuevaX;
 		this.y = nuevaY;
 		switch (champ) {
 		case 1:
-			app.image(champUno, x + desfase, y + desfase, 20, 20);
+			app.pushMatrix();
+			app.translate(x - desfase, y - desfase);
+			app.image(champUno, 0, 0, 20, 20);
+			app.popMatrix();
 			break;
 		case 2:
-			app.image(champDos, x + desfase, y + desfase, 20, 20);
+			app.pushMatrix();
+			app.translate(x - desfase, y - desfase);
+			app.image(champDos, 0, 0, 20, 20);
+			app.popMatrix();
 			break;
 		}
 	}

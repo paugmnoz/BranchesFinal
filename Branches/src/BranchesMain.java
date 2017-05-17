@@ -40,8 +40,8 @@ public class BranchesMain extends PApplet {
 	}
 	
 	public void mouseReleased(){
-		println(mouseX, mouseY);
-		m.click();
+		println("mouseX: " + mouseX, "mouseY: " + mouseY);
+		//m.click();
 	}
 	
 }

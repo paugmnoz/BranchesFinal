@@ -7,6 +7,7 @@ public class SelectorChamp {
 	private Mundo m;
 	private float x, y, tam;
 	private ArrayList<Champinon> champinones;
+	private PApplet app;
 
 	public SelectorChamp(Mundo m, float x, float y, float tam) {
 		this.m = m;
@@ -15,6 +16,7 @@ public class SelectorChamp {
 	}
 
 	public void pintar(PApplet app) {
+		this.app = app;
 		x = app.mouseX;
 		y = app.mouseY;
 		app.noFill();

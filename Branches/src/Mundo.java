@@ -52,6 +52,7 @@ public class Mundo {
 		libreta = false;
 		champinonPrin = false;
 		fotos = new Foto(this, 0, 0, 30);
+		fotos.start();
 		pote = new Pote(this);
 		champ = new ArrayList<Champinon>();
 		selectorChamp = new SelectorChamp(this, app.mouseX, app.mouseY, 150);
@@ -231,7 +232,6 @@ public class Mundo {
 	// -----------------------MAKEY MAKEY----------------------//
 
 	public void makey(PApplet app) {
-		System.out.println(tam);
 		// ------------PANTALLA DE CARGA---------//
 		if (pantalla == 0) {
 			//
