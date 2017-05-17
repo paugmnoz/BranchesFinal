@@ -22,6 +22,7 @@ public class Mundo {
 	private ArrayList<Champinon> champ;
 	private int contarChamps;
 	private ArrayList<Calaverita> calaveritas;
+	
 	// para pre entrega
 	int eX = 964, eY = 297;
 
@@ -91,7 +92,7 @@ public class Mundo {
 	}
 
 	public void cargarFondo() {
-		revUnoF = cargar.getRevUnoF();
+		revUnoF = cargar.getFondoUno();
 	}
 
 	/*
@@ -210,23 +211,24 @@ public class Mundo {
 
 	public void avanzar(PApplet app) {
 		if (PApplet.dist(eX, eY, app.mouseX, app.mouseY) < 25 && tam < 2000) {
-			tam += 20;
-		} else if (tam >= 2000) {
-			tam = 2000;
-			revUno = 1;
-		}
+			numFrame += 3;
+			if (numFrame >= 143) {
+				numFrame = 143;
+				pantalla = 5;
+			}
+		} 
 
 	}
 
+	// ---------- REV UNO CALAVERITAS ---------//
 	public void pintarFondo() {
-		app.image(revUnoF[numFrame], app.width / 2, app.height / 2, revUnoF[numFrame].width / 2 + 100 + tam,
-				revUnoF[numFrame].height / 2 + tam);
-		if (app.frameCount % 1 == 0) {
+		app.image(revUnoF[numFrame], app.width / 2, app.height / 2);
+	/*if (app.frameCount % 3 == 0) {
 			numFrame++;
-			if (numFrame >= 7) {
+			if (numFrame >= 143) {
 				numFrame = 0;
 			}
-		}
+		}*/
 	}
 
 	// -----------------------MAKEY MAKEY----------------------//
@@ -249,7 +251,6 @@ public class Mundo {
 			if (app.keyCode == 87) {
 				cajon = 1;
 			} else if (app.keyCode == 32 && cajon == 1) {
-				agregarCalaveritas();
 				pantalla = 4;
 				numFrame = 0;
 			}
@@ -270,19 +271,20 @@ public class Mundo {
 			if (app.keyCode == 32) {
 				pantalla = 6;
 			}
-		// -----------------------PANTALLA KULESHOV ------------------//
+			// -----------------------PANTALLA KULESHOV ------------------//
 		} else if (pantalla == 6) {
 
 			if (app.keyCode == 32) {
 				pantalla = 7;
 			}
-		// ------------------PANTALLA FOTOS. REV TRES ------------------//
+			// ------------------PANTALLA FOTOS. REV TRES ------------------//
 		} else if (pantalla == 7) {
 
 			if (app.keyCode == 32) {
 				pantalla = 8;
 			}
-		// --------------PANTALLA CAJON-LLAVE. REV CUATRO -----------------//
+			// --------------PANTALLA CAJON-LLAVE. REV CUATRO
+			// -----------------//
 		} else if (pantalla == 8) {
 
 			if (app.keyCode == 32) {

@@ -4,7 +4,7 @@ import processing.core.PImage;
 
 public class Calaverita implements Runnable {
 
-	private PImage[] cArray;
+	private PImage[] calavIzq, calavDer;
 	private PImage c;
 	private float x, y;
 	private boolean viendo;
@@ -14,21 +14,22 @@ public class Calaverita implements Runnable {
 
 	public Calaverita(Mundo m, float x, float y) {
 		this.m = m;
-		this.x =x;
+		this.x = x;
 		this.y = y;
 		cargarCalaverita();
 	}
 
 	public void cargarCalaverita() {
-	 //  c = app.loadImage("../data/Calavera_Prueba.png");
+		m.getCargar().getCalaverasIz();
+		m.getCargar().getCalaverasDer();
 	}
-	
+
 	/*
 	 * Metodo que cargara con un for las imagenes para la animacion de cuando se
 	 * abre la puertapara cambiar de pantalla
 	 */
 	private void cargarPuerta() {
-	
+
 	}
 
 	/*
@@ -36,8 +37,8 @@ public class Calaverita implements Runnable {
 	 */
 	public void pintar(PApplet app) {
 		this.app = app;
-		app.rect(x,y,100,100);
-	//	app.image(c, x, y);
+		app.rect(x, y, 100, 100);
+		// app.image(c, x, y);
 	}
 
 	/*
@@ -58,7 +59,7 @@ public class Calaverita implements Runnable {
 
 	/*
 	 * Metodo que contendrá la animación de cuando se abre la puerta
-	 * */
+	 */
 	public void abrirPuerta() {
 
 	}
@@ -70,6 +71,5 @@ public class Calaverita implements Runnable {
 	public float getY() {
 		return y;
 	}
-
 
 }

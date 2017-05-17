@@ -14,6 +14,9 @@ public class Cargar extends Thread {
 	private PImage[] fotoUno, fotoDos, fotoTres, fotoCuatro, fotoCinco, fotoSeis, fotoSiete, fotoOcho;
 	private PImage fondo, llave;
 
+	// Pantalla calaveritas
+	private PImage[] fondoUno, calaverasDer, calaverasIz;
+
 	public Cargar(PApplet app) {
 		this.app = app;
 		cargado = false;
@@ -31,8 +34,27 @@ public class Cargar extends Thread {
 			cargarChampinones();
 			cargarPote();
 			cargarFotos();
+			cargarFondoCalaveritas();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		}
+	}
+
+	// -------------PANTALLA CALAVERITAS---------------//
+	public void cargarFondoCalaveritas() {
+		fondoUno = new PImage[144];
+		for (int i = 0; i < fondoUno.length; i++) {
+			fondoUno[i] = app.loadImage("../data/RevisionUno/RevisionUno_" + i + ".png");
+		}
+		
+		calaverasDer = new PImage[73];
+		for (int i = 0; i < calaverasDer.length; i++) {
+			calaverasDer[i] = app.loadImage("../data/CPerdilDere/CPerfilDere_" + i + ".png");
+		}
+		
+		calaverasIz = new PImage[73];
+		for (int i = 0; i < calaverasIz.length; i++) {
+			calaverasIz[i] = app.loadImage("../data/CPerfil Izq/CPerfilIzq_" + i + ".png");
 		}
 	}
 
@@ -95,7 +117,7 @@ public class Cargar extends Thread {
 	// -----------------PANTALLA FOTOS------------//
 	public void cargarFotos() {
 		fondo = app.loadImage("../data/PantallaFotos/fondo.png");
-		
+
 		// FOTO UNO
 		fotoUno = new PImage[6];
 		for (int i = 0; i < fotoUno.length; i++) {
@@ -334,6 +356,17 @@ public class Cargar extends Thread {
 		this.fotoOcho = fotoOcho;
 	}
 	
+	public PImage[] getCalaverasDer() {
+		return calaverasDer;
+	}
+	
+	public PImage[] getCalaverasIz() {
+		return calaverasIz;
+	}
+	
+	public PImage[] getFondoUno() {
+		return fondoUno;
+	}
 
 	// --------------FINAL DE LA CLASE CARGAR------------//
 }

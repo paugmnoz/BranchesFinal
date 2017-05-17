@@ -21,6 +21,7 @@ public class BranchesMain extends PApplet {
 	public void setup() {
 		m = new Mundo(this);
 		imageMode(CENTER);
+		//frameRate(12);
 
 	}
 	
