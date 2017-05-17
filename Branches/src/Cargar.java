@@ -1,33 +1,44 @@
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Cargar {
+public class Cargar extends Thread {
 
 	private PApplet app;
 	private PImage cargarCalaverita;
-	private PImage [] kuleshov;
-	private PImage [] abrir, revUnoF, cajonFlotante, abreCajon, acercaCajon; 
+	private PImage[] kuleshov;
+	private PImage[] abrir, revUnoF, cajonFlotante, abreCajon, acercaCajon;
 	private PImage champUno, champDos, pote;
 	private int champ;
-	//Pantalla Fotos
+	private boolean cargado;
+	// Pantalla Fotos
 	private PImage fondo, fotoUno, fotoDos, fotoTres, fotoCuatro, fotoCinco, fotoSeis, fotoSiete, fotoOcho, llave;
-
 
 	public Cargar(PApplet app) {
 		this.app = app;
-		cargarKuleshov();
-		cargarCajonAbrir();
-		cargarFondo();
-		cargarCajonF();
-		cargarAbreCajon();
-		cargarAcercarCajon();
-		cargarChampinones();
-		cargarPote();
-		cargarFotos();
+		cargado = false;
 	}
 
+	public void run() {
+		try {
+			// while (vivo) {
+			sleep(15);
+			cargarKuleshov();
+			cargarCajonAbrir();
+			cargarFondo();
+			cargarCajonF();
+			cargarAbreCajon();
+			cargarAcercarCajon();
+			cargarChampinones();
+			cargarPote();
+			cargarFotos();
 
-	//-------PANTALLA CAJÓN FLOTANDO---------//
+			// }
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// -------PANTALLA CAJÓN FLOTANDO---------//
 	public void cargarCajonAbrir() {
 		abrir = new PImage[12];
 		for (int i = 0; i < abrir.length; i++) {
@@ -45,10 +56,8 @@ public class Cargar {
 
 	public void cargarCajonF() {
 		cajonFlotante = new PImage[30];
-		for (int i = 0; i < cajonFlotante.length; i++) {
+		for (int i = 0; i < cajonFlotante.length; i++)
 			cajonFlotante[i] = app.loadImage("../data/CajonFlotando/CajonFlotando_" + i + ".png");
-
-		}
 	}
 
 	public void cargarAbreCajon() {
@@ -65,17 +74,17 @@ public class Cargar {
 			acercaCajon[i] = app.loadImage("../data/CajonAcercar/CajonAcercar_" + i + ".png");
 		}
 	}
-	
+
 	// -----------------PANTALLA CHAMP. REV DOS----------------------//
 	public void cargarChampinones() {
-			champUno = app.loadImage("../data/PantallaArbol/champUno.png");
-			champDos = app.loadImage("../data/PantallaArbol/champDos.png");
+		champUno = app.loadImage("../data/PantallaArbol/champUno.png");
+		champDos = app.loadImage("../data/PantallaArbol/champDos.png");
 	}
-	
+
 	public void cargarPote() {
 		pote = app.loadImage("../data/PantallaArbol/pote.png");
-}
-	
+	}
+
 	// -----------------------PANTALLA KULESHOV ------------------//
 	public void cargarKuleshov() {
 		kuleshov = new PImage[1];
@@ -83,9 +92,9 @@ public class Cargar {
 			kuleshov[i] = app.loadImage("../data/kuleshov_prueba_" + i + ".png");
 		}
 	}
-	
-	//-----------------PANTALLA FOTOS------------//
-	public void cargarFotos (){
+
+	// -----------------PANTALLA FOTOS------------//
+	public void cargarFotos() {
 		fondo = app.loadImage("../data/PantallaFotos/fondo.png");
 		fotoUno = app.loadImage("../data/PantallaFotos/fotoUno.png");
 		fotoDos = app.loadImage("../data/PantallaFotos/fotoDos.png");
@@ -96,9 +105,10 @@ public class Cargar {
 		fotoSiete = app.loadImage("../data/PantallaFotos/fotoSiete.png");
 		fotoOcho = app.loadImage("../data/PantallaFotos/fotoOcho.png");
 		llave = app.loadImage("../data/PantallaFotos/llave.png");
+		cargado = true;
 	}
 
-	//-------------GETTERS Y SETTERS------------//
+	// -------------GETTERS Y SETTERS------------//
 	public PImage getCargarCalaverita() {
 		return cargarCalaverita;
 	}
@@ -179,117 +189,101 @@ public class Cargar {
 		this.champ = champ;
 	}
 
-
 	public PImage getFondo() {
 		return fondo;
 	}
-
 
 	public void setFondo(PImage fondo) {
 		this.fondo = fondo;
 	}
 
-
 	public PImage getFotoUno() {
 		return fotoUno;
 	}
-
 
 	public void setFotoUno(PImage fotoUno) {
 		this.fotoUno = fotoUno;
 	}
 
-
 	public PImage getFotoDos() {
 		return fotoDos;
 	}
-
 
 	public void setFotoDos(PImage fotoDos) {
 		this.fotoDos = fotoDos;
 	}
 
-
 	public PImage getFotoTres() {
 		return fotoTres;
 	}
-
 
 	public void setFotoTres(PImage fotoTres) {
 		this.fotoTres = fotoTres;
 	}
 
-
 	public PImage getFotoCuatro() {
 		return fotoCuatro;
 	}
-
 
 	public void setFotoCuatro(PImage fotoCuatro) {
 		this.fotoCuatro = fotoCuatro;
 	}
 
-
 	public PImage getFotoCinco() {
 		return fotoCinco;
 	}
-
 
 	public void setFotoCinco(PImage fotoCinco) {
 		this.fotoCinco = fotoCinco;
 	}
 
-
 	public PImage getFotoSeis() {
 		return fotoSeis;
 	}
-
 
 	public void setFotoSeis(PImage fotoSeis) {
 		this.fotoSeis = fotoSeis;
 	}
 
-
 	public PImage getFotoSiete() {
 		return fotoSiete;
 	}
-
 
 	public void setFotoSiete(PImage fotoSiete) {
 		this.fotoSiete = fotoSiete;
 	}
 
-
 	public PImage getFotoOcho() {
 		return fotoOcho;
 	}
-
 
 	public void setFotoOcho(PImage fotoOcho) {
 		this.fotoOcho = fotoOcho;
 	}
 
-
 	public PImage getLlave() {
 		return llave;
 	}
-
 
 	public void setLlave(PImage llave) {
 		this.llave = llave;
 	}
 
-
 	public PImage getPote() {
 		return pote;
 	}
 
-
 	public void setPote(PImage pote) {
 		this.pote = pote;
 	}
-	
-	
+
+	public boolean isCargado() {
+		return cargado;
+	}
+
+	public void setCargado(boolean cargado) {
+		this.cargado = cargado;
+	}
 
 	// --------------FINAL DE LA CLASE CARGAR------------//
 }

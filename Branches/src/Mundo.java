@@ -7,7 +7,7 @@ import processing.core.PImage;
 public class Mundo {
 
 	private boolean moverC, abrirC, champinonPrin, libreta, lis;
-	private int pantalla, numFrame, numFrameA, numFrameAbrir, numFrameAC, numFramePuerta;
+	private int pantalla, numFrame, numFrameA, numFrameAbrir, numFrameAC, numFramePuerta, numCargando;
 	private int cajon, revUno;
 	private float tam;
 	private Libreta lib;
@@ -15,13 +15,14 @@ public class Mundo {
 	private ChampinonPrin champPrin;
 	private Cargar cargar;
 	private Cajon cajonClase;
-	private Thread capsulaCajonClase;
+	private PImage[] cargando;
 	private Foto fotos;
 	private Pote pote;
 	private SelectorChamp selectorChamp;
 	private ArrayList<Champinon> champ;
 	private int contarChamps;
 	private ArrayList<Calaverita> calaveritas;
+	PImage arbol;
 	// para pre entrega
 	int eX = 964, eY = 297;
 
@@ -31,15 +32,28 @@ public class Mundo {
 
 	public Mundo(PApplet app) {
 		this.app = app;
-		inicializarVariables();
-		cargarImagenes();
+		cargarPantallaDeCarga();
+		// inicializarVariables();
+		iniciarHilo();
+		arbol = app.loadImage("../data/PantallaArbol/Arbol/arbolCorte_296.png");
+	}
+
+	public void cargarPantallaDeCarga() {
+		cargando = new PImage[52];
+		for (int i = 0; i < cargando.length; i++) {
+			cargando[i] = app.loadImage("../data/cargando/cargando_" + i + ".png");
+		}
+	}
+
+	public void iniciarHilo() {
+		cargar = new Cargar(app);
+		cargar.start();
 	}
 
 	public void inicializarVariables() {
 		lis = false;
 		libreta = false;
 		champinonPrin = false;
-		cargar = new Cargar(app);
 		fotos = new Foto(this, 0, 0, 30);
 		pote = new Pote(this);
 		champ = new ArrayList<Champinon>();
@@ -47,8 +61,7 @@ public class Mundo {
 		liss = new Lis();
 		lib = new Libreta();
 		cajonClase = new Cajon(app, this);
-		capsulaCajonClase = new Thread(cajonClase);
-		capsulaCajonClase.start();
+		cajonClase.start();
 		champPrin = new ChampinonPrin(app, app.width / 2 + 400, app.height / 2 - 50);
 		calaveritas = new ArrayList<Calaverita>();
 		numFrame = 0;
@@ -57,19 +70,15 @@ public class Mundo {
 	}
 
 	public void cargarImagenes() {
-		//cargarCajonF();
-		//cargarAbreCajon();
-		//cargarCajonAbrir();
-		//cargarAcercarCajon();
 		cargarFondo();
 		cargarKuleshov();
 	}
 
 	public void anadirChampinones() {
-		//for (int i = 0; i < 1000; i++) {
-			//champ.add(new Champinon(this, (float) Math.random() * app.width,
-				//	(float) ((app.height / 2 + 200) + Math.random() * app.height)));
-		//}
+		// for (int i = 0; i < 1000; i++) {
+		// champ.add(new Champinon(this, (float) Math.random() * app.width,
+		// (float) ((app.height / 2 + 200) + Math.random() * app.height)));
+		// }
 	}
 
 	public void recogerChampinones() {
@@ -84,40 +93,16 @@ public class Mundo {
 		kuleshov = cargar.getKuleshov();
 	}
 
-	/*
-	public void cargarCajonAbrir() {
-		abrir = cargar.getAbrir();
-	}
-	*/
-
 	public void cargarFondo() {
 		revUnoF = cargar.getRevUnoF();
 	}
-
-	/*
-	public void cargarCajonF() {
-		cajonFlotante = cargar.getCajonFlotante();
-	}
-
-	public void cargarAbreCajon() {
-		abreCajon = cargar.getAbreCajon();
-	}
-
-	public void cargarAcercarCajon() {
-		acercaCajon = cargar.getAcercaCajon();
-	}
-
-	public void cargarMoverCajon() {
-
-	}
-	*/
 
 	/*
 	 * metodo para visualizar la aplicación
 	 */
 	public void pintar(PApplet app) {
 		pantallas(app);
-		System.out.println("Estado Capsula: " + capsulaCajonClase.getState());
+		// System.out.println("Estado Hilo Cajón: " + cajonClase.getState());
 	}
 
 	public void pantallas(PApplet app) {
@@ -125,16 +110,20 @@ public class Mundo {
 		// ------------PANTALLA DE CARGA---------//
 		case 0:
 			app.background(255);
-			app.text("Pantalla de carga", app.width/2, app.height/2);
+			pintarPantallaDeCarga();
+			if (cargar.getState() == Thread.State.TERMINATED) {
+				inicializarVariables();
+				cargarImagenes();
+				pantalla = 1;
+			}
 			break;
 		// --------PANTALLA MESA FLOTANDO----------//
 		case 1:
-			//pintarCajonFlotante(app);
 			cajonClase.pintarCajonFlotante();
 			break;
 		//
 		case 2:
-			//pintarAcercarCajon();
+			// pintarAcercarCajon();
 			cajonClase.pintarAcercarCajon();
 			break;
 		case 3:
@@ -142,15 +131,15 @@ public class Mundo {
 			switch (cajon) {
 			case 0:
 				cajonClase.pintarAbrir();
-				//pintarAbrir();
+				// pintarAbrir();
 				break;
 			case 1:
-				//pintarAbrirCajon();
+				// pintarAbrirCajon();
 				cajonClase.pintarAbrirCajon();
 				if (numFrameAC >= 12) {
-					//liss.pintar(app);
-					//lib.pintar(app);
-					//champPrin.pintar(app);
+					// liss.pintar(app);
+					// lib.pintar(app);
+					// champPrin.pintar(app);
 				}
 				break;
 			}
@@ -207,6 +196,16 @@ public class Mundo {
 
 	}
 
+	public void pintarPantallaDeCarga(){
+		if (app.frameCount % 2 == 0 && numCargando < cargando.length) {
+			numCargando++;
+			if (numCargando >= cargando.length) {
+				numCargando = 0;
+			}
+		}
+		app.image(cargando[numCargando], app.width / 2, app.height / 2);
+	}
+	
 	public void pintarCalaveritas() {
 		for (int i = 0; i < calaveritas.size(); i++) {
 			calaveritas.get(i).pintar(app);
@@ -265,7 +264,6 @@ public class Mundo {
 	}
 
 	public void pintarFondo() {
-
 		app.image(revUnoF[numFrame], app.width / 2, app.height / 2, revUnoF[numFrame].width / 2 + 100 + tam,
 				revUnoF[numFrame].height / 2 + tam);
 		if (app.frameCount % 1 == 0) {
@@ -302,10 +300,8 @@ public class Mundo {
 
 	public void makey(PApplet app) {
 		System.out.println(tam);
-		if(pantalla == 0){
-			if (app.keyCode == 32) {
-				pantalla = 1;
-			}
+		if (pantalla == 0) {
+			//
 		} else if (pantalla == 1) {
 			iniciarApp(app);
 		} else if (pantalla == 2) {
@@ -419,7 +415,7 @@ public class Mundo {
 	public void setCajon(int cajon) {
 		this.cajon = cajon;
 	}
-	
-	//-------------FINAL DE LA CLASE MUNDO--------------//
+
+	// -------------FINAL DE LA CLASE MUNDO--------------//
 
 }

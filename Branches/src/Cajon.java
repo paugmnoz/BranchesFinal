@@ -1,14 +1,14 @@
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Cajon implements Runnable {
+public class Cajon extends Thread {
 
 	private PApplet app;
 	private Mundo m;
 	private int pantalla, cajon;
 	private boolean vivo;
 	private PImage[] abrir, cajonFlotante, abreCajon, acercaCajon;
-	private int numFrame, numFrameAbrir, numFrameAC;
+	private int numFrame, numFrameAcerca, numFrameAbrir, numFrameAC;
 
 	public Cajon(PApplet app, Mundo m) {
 		this.app = app;
@@ -35,7 +35,7 @@ public class Cajon implements Runnable {
 		while (vivo) {
 			try {
 				calculo();
-				Thread.sleep(33);
+				sleep(33);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -83,12 +83,12 @@ public class Cajon implements Runnable {
 	}
 
 	public void calculoAcercaCajon() {
-		if (app.frameCount % 5 == 0 && numFrame != 16) {
-			if (numFrame <= 16) {
-				numFrame++;
+		if (app.frameCount % 5 == 0 && numFrameAcerca != 16) {
+			if (numFrameAcerca <= 16) {
+				numFrameAcerca++;
 			}
-		} else if (numFrame >= 16) {
-			numFrame = 16;
+		} else if (numFrameAcerca >= 16) {
+			numFrameAcerca = 16;
 		}
 	}
 
@@ -115,11 +115,13 @@ public class Cajon implements Runnable {
 	// ---------PINTAR-------//
 	public void pintarCajonFlotante() {
 		System.out.println("numFrame: " + numFrame);
+		System.out.println("Estado Cajon: " + cajonFlotante);
+		cajonFlotante = m.getCargar().getCajonFlotante();
 		app.image(cajonFlotante[numFrame], app.width / 2, app.height / 2);
 	}
 
 	public void pintarAcercarCajon() {
-		app.image(acercaCajon[numFrame], app.width / 2, app.height / 2);
+		app.image(acercaCajon[numFrameAcerca], app.width / 2, app.height / 2);
 	}
 
 	public void pintarAbrirCajon() {
