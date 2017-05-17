@@ -62,7 +62,6 @@ public class Mundo {
 		champPrin = new ChampinonPrin(app, app.width / 2 + 400, app.height / 2 - 50);
 		calaveritas = new ArrayList<Calaverita>();
 		numFrame = 0;
-		anadirChampinones();
 		pantalla = 0;
 	}
 
@@ -72,10 +71,10 @@ public class Mundo {
 	}
 
 	public void anadirChampinones() {
-		// for (int i = 0; i < 1000; i++) {
-		// champ.add(new Champinon(this, (float) Math.random() * app.width,
-		// (float) ((app.height / 2 + 200) + Math.random() * app.height)));
-		// }
+		for (int i = 0; i < 500; i++) {
+			champ.add(new Champinon(this, (float) Math.random() * app.width,
+					(float) ((app.height / 2 + 200) + Math.random() * app.height)));
+		}
 	}
 
 	public void recogerChampinones() {
@@ -190,17 +189,18 @@ public class Mundo {
 
 	}
 
-	//----------------ANIMACIONES---------------//
-	public void pintarPantallaDeCarga(){
+	// ----------------ANIMACIONES---------------//
+	public void pintarPantallaDeCarga() {
 		if (app.frameCount % 3 == 0 && numCargando < cargando.length) {
 			numCargando++;
 			if (numCargando >= cargando.length) {
 				numCargando = 0;
 			}
 		}
-		app.image(cargando[numCargando], app.width / 2, app.height / 2, cargando[numCargando].width/2, cargando[numCargando].height/2);
+		app.image(cargando[numCargando], app.width / 2, app.height / 2, cargando[numCargando].width / 2,
+				cargando[numCargando].height / 2);
 	}
-	
+
 	public void pintarCalaveritas() {
 		for (int i = 0; i < calaveritas.size(); i++) {
 			calaveritas.get(i).pintar(app);
@@ -232,8 +232,10 @@ public class Mundo {
 
 	public void makey(PApplet app) {
 		System.out.println(tam);
+		// ------------PANTALLA DE CARGA---------//
 		if (pantalla == 0) {
 			//
+			// --------PANTALLA MESA FLOTANDO----------//
 		} else if (pantalla == 1) {
 			iniciarApp(app);
 		} else if (pantalla == 2) {
@@ -257,25 +259,30 @@ public class Mundo {
 
 			if (app.keyCode == 32 && revUno == 1) {
 				pantalla = 5;
+				anadirChampinones();
 			}
 		}
 
+		// -----------------PANTALLA CHAMP. REV DOS----------------------//
 		else if (pantalla == 5) {
 			pote.mover();
 
 			if (app.keyCode == 32) {
 				pantalla = 6;
 			}
+		// -----------------------PANTALLA KULESHOV ------------------//
 		} else if (pantalla == 6) {
 
 			if (app.keyCode == 32) {
 				pantalla = 7;
 			}
+		// ------------------PANTALLA FOTOS. REV TRES ------------------//
 		} else if (pantalla == 7) {
 
 			if (app.keyCode == 32) {
 				pantalla = 8;
 			}
+		// --------------PANTALLA CAJON-LLAVE. REV CUATRO -----------------//
 		} else if (pantalla == 8) {
 
 			if (app.keyCode == 32) {
@@ -286,10 +293,6 @@ public class Mundo {
 
 	public void agregarCalaveritas() {
 		calaveritas.add(new Calaverita(this, 200, 300));
-	}
-
-	public void abrircajon() {
-
 	}
 
 	public void click() {
