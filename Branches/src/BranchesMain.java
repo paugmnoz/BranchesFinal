@@ -30,7 +30,7 @@ public class BranchesMain extends PApplet {
 		m.pintar(this);
 	}
 	@Override
-	public void keyReleased() {
+	public void keyPressed() {
 		m.makey(this);
 	}
 	

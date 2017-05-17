@@ -54,7 +54,7 @@ public class Cajon extends Thread {
 			break;
 		case 3:
 
-			switch (cajon) {
+			switch (m.getCajon()) {
 			case 0:
 				calculoPintarAbrir();
 				break;

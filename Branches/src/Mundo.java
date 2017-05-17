@@ -22,7 +22,6 @@ public class Mundo {
 	private ArrayList<Champinon> champ;
 	private int contarChamps;
 	private ArrayList<Calaverita> calaveritas;
-	PImage arbol;
 	// para pre entrega
 	int eX = 964, eY = 297;
 
@@ -33,9 +32,7 @@ public class Mundo {
 	public Mundo(PApplet app) {
 		this.app = app;
 		cargarPantallaDeCarga();
-		// inicializarVariables();
 		iniciarHilo();
-		arbol = app.loadImage("../data/PantallaArbol/Arbol/arbolCorte_296.png");
 	}
 
 	public void cargarPantallaDeCarga() {
@@ -123,7 +120,6 @@ public class Mundo {
 			break;
 		//
 		case 2:
-			// pintarAcercarCajon();
 			cajonClase.pintarAcercarCajon();
 			break;
 		case 3:
@@ -131,10 +127,8 @@ public class Mundo {
 			switch (cajon) {
 			case 0:
 				cajonClase.pintarAbrir();
-				// pintarAbrir();
 				break;
 			case 1:
-				// pintarAbrirCajon();
 				cajonClase.pintarAbrirCajon();
 				if (numFrameAC >= 12) {
 					// liss.pintar(app);
@@ -196,6 +190,7 @@ public class Mundo {
 
 	}
 
+	//----------------ANIMACIONES---------------//
 	public void pintarPantallaDeCarga(){
 		if (app.frameCount % 3 == 0 && numCargando < cargando.length) {
 			numCargando++;
@@ -222,47 +217,6 @@ public class Mundo {
 
 	}
 
-	// -------------ANIMACIONES-------------//
-
-	/*
-	 * Metodo que pintara la animacion del cajon flotando
-	 */
-	public void pintarCajonFlotante(PApplet app) {
-		app.image(cajonFlotante[numFrame], app.width / 2, app.height / 2);
-		if (app.frameCount % 5 == 0) {
-			numFrame++;
-			if (numFrame >= 28) {
-				numFrame = 0;
-			}
-		}
-	}
-
-	/*
-	 * Metodo que pintara la animacion de cuando el usuario abre el cajon
-	 */
-	public void pintarAcercarCajon() {
-		app.image(acercaCajon[numFrame], app.width / 2, app.height / 2);
-		if (app.frameCount % 5 == 0 && numFrame != 16) {
-			if (numFrame <= 16) {
-				numFrame++;
-			}
-		} else if (numFrame >= 16) {
-			numFrame = 16;
-		}
-
-	}
-
-	public void pintarAbrir() {
-		app.image(abrir[numFrameAbrir], app.width / 2, app.height / 2);
-		if (app.frameCount % 5 == 0 && numFrameAbrir != 11) {
-			if (numFrameAbrir <= 11) {
-				numFrameAbrir++;
-			}
-		} else if (numFrameAbrir >= 11) {
-			numFrameAbrir = 11;
-		}
-	}
-
 	public void pintarFondo() {
 		app.image(revUnoF[numFrame], app.width / 2, app.height / 2, revUnoF[numFrame].width / 2 + 100 + tam,
 				revUnoF[numFrame].height / 2 + tam);
@@ -272,28 +226,6 @@ public class Mundo {
 				numFrame = 0;
 			}
 		}
-	}
-
-	/*
-	 * Metodo que pintara la animacion de cuando el usuario abre el cajon
-	 */
-	public void pintarAbrirCajon() {
-		app.image(abreCajon[numFrameAC], app.width / 2, app.height / 2);
-		if (app.frameCount % 5 == 0 && numFrameAC != 13) {
-			if (numFrameAC <= 13) {
-				numFrameAC++;
-			}
-		} else if (numFrameAC >= 13) {
-			numFrameAC = 13;
-		}
-	}
-
-	/*
-	 * Metodo que movera el cajon cada vez que pase alguien al frente de la
-	 * instalación
-	 */
-	public void moverCajon() {
-
 	}
 
 	// -----------------------MAKEY MAKEY----------------------//

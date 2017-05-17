@@ -6,11 +6,13 @@ public class Pote {
 	private PApplet app;
 	private PImage pote;
 	private float x, y;
+	private boolean rotar;
 	private Mundo m;
 
 	public Pote(Mundo m) {
 		this.m = m;
 		cargar();
+		rotar = false;
 	}
 
 	/*
@@ -25,7 +27,23 @@ public class Pote {
 
 	public void pintar(PApplet app) {
 		this.app = app;
-		app.image(pote, x, y, 150, 150);
+		app.pushMatrix();
+		app.translate(x, y);
+		rotar(app);
+		app.image(pote, 0, 0, 150, 150);
+		app.popMatrix();
+	}
+
+	public void rotar(PApplet app) {
+		this.app = app;
+		if (app.keyPressed) {
+			if (app.keyCode == app.RIGHT) {
+				app.rotate(app.radians(20));
+			}
+			if (app.keyCode == app.LEFT) {
+				app.rotate(app.radians(-20));
+			}
+		}
 	}
 
 	/*
@@ -33,17 +51,21 @@ public class Pote {
 	 */
 	public void mover() {
 		if (app.keyCode == app.RIGHT) {
-			x += 5;
+			x += 9;
 		}
 		if (app.keyCode == app.LEFT) {
-			x -= 5;
+			x -= 9;
 		}
 		if (app.keyCode == app.UP) {
-			y -= 5;
+			y -= 9;
 		}
 		if (app.keyCode == app.DOWN) {
-			y += 5;
+			y += 9;
 		}
+	}
+
+	public void enderezar() {
+
 	}
 
 	/*
