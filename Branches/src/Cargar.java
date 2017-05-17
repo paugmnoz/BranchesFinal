@@ -7,7 +7,7 @@ public class Cargar extends Thread {
 	private PImage cargarCalaverita;
 	private PImage[] kuleshov;
 	private PImage[] abrir, revUnoF, cajonFlotante, abreCajon, acercaCajon;
-	private PImage champUno, champDos, pote;
+	private PImage champUno, champDos, pote, poteAtras, poteAdelante;
 	private int champ;
 	private boolean cargado;
 	// Pantalla Fotos
@@ -83,6 +83,8 @@ public class Cargar extends Thread {
 
 	public void cargarPote() {
 		pote = app.loadImage("../data/PantallaArbol/pote.png");
+		poteAtras = app.loadImage("../data/PantallaArbol/poteAtras.png");
+		poteAdelante = app.loadImage("../data/PantallaArbol/poteAdelante.png");
 	}
 
 	// -----------------------PANTALLA KULESHOV ------------------//
@@ -284,6 +286,24 @@ public class Cargar extends Thread {
 	public void setCargado(boolean cargado) {
 		this.cargado = cargado;
 	}
+
+	public PImage getPoteAtras() {
+		return poteAtras;
+	}
+
+	public void setPoteAtras(PImage poteAtras) {
+		this.poteAtras = poteAtras;
+	}
+
+	public PImage getPoteAdelante() {
+		return poteAdelante;
+	}
+
+	public void setPoteAdelante(PImage poteAdelante) {
+		this.poteAdelante = poteAdelante;
+	}
+	
+	
 
 	// --------------FINAL DE LA CLASE CARGAR------------//
 }

@@ -4,7 +4,7 @@ import processing.core.PImage;
 public class Pote {
 
 	private PApplet app;
-	private PImage pote;
+	private PImage poteAtras, poteAdelante;
 	private float x, y;
 	private boolean rotar;
 	private Mundo m;
@@ -22,7 +22,8 @@ public class Pote {
 	public void cargar() {
 		x = 960;
 		y = 540;
-		pote = m.getCargar().getPote();
+		poteAtras = m.getCargar().getPoteAtras();
+		poteAdelante = m.getCargar().getPoteAdelante();
 	}
 
 	public void pintar(PApplet app) {
@@ -30,10 +31,14 @@ public class Pote {
 		app.pushMatrix();
 		app.translate(x, y);
 		rotar(app);
-		app.image(pote, 0, 0, 150, 150);
+		app.image(poteAtras, 0, 0, 150, 150);
+		app.image(poteAdelante, 0, 0, 150, 150);
 		app.popMatrix();
 	}
 
+	/*
+	 * Metodo para inclinar el PImage segun la direccion del movimiento
+	 */
 	public void rotar(PApplet app) {
 		this.app = app;
 		if (app.keyPressed) {
@@ -64,24 +69,21 @@ public class Pote {
 		}
 	}
 
-	public void enderezar() {
-
-	}
-
-	/*
-	 * Metodo para inclinar el PImage segun la direccion del movimiento
-	 */
-	public void inclinar(PApplet app) {
-
-	}
-
 	// GETTERS Y SETTERS
-	public PImage getPote() {
-		return pote;
+	public PImage getPoteAtras() {
+		return poteAtras;
 	}
 
 	public void setPote(PImage pote) {
-		this.pote = pote;
+		this.poteAtras = poteAtras;
+	}
+	
+	public PImage getPoteAdelante() {
+		return poteAtras;
+	}
+
+	public void setPoteAdelante(PImage pote) {
+		this.poteAdelante = poteAdelante;
 	}
 
 	public float getX() {
