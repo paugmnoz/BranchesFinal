@@ -109,7 +109,7 @@ public class Mundo {
 		switch (pantalla) {
 		// ------------PANTALLA DE CARGA---------//
 		case 0:
-			app.background(255);
+			app.background(52, 8, 70);
 			pintarPantallaDeCarga();
 			if (cargar.getState() == Thread.State.TERMINATED) {
 				inicializarVariables();
@@ -197,13 +197,13 @@ public class Mundo {
 	}
 
 	public void pintarPantallaDeCarga(){
-		if (app.frameCount % 2 == 0 && numCargando < cargando.length) {
+		if (app.frameCount % 3 == 0 && numCargando < cargando.length) {
 			numCargando++;
 			if (numCargando >= cargando.length) {
 				numCargando = 0;
 			}
 		}
-		app.image(cargando[numCargando], app.width / 2, app.height / 2);
+		app.image(cargando[numCargando], app.width / 2, app.height / 2, cargando[numCargando].width/2, cargando[numCargando].height/2);
 	}
 	
 	public void pintarCalaveritas() {
