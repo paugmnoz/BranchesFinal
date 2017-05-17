@@ -42,8 +42,22 @@ public class Foto extends Thread {
 	}
 
 	public void iniciarVariables() {
-		xUno = 1242;
-		yUno = 675;
+		xUno = 1889;
+		yUno = 1030;
+		xDos = 1899;
+		yDos = 600;
+		xTres = 1510;
+		yTres = 458;
+		xCuatro = 1449;
+		yCuatro = 883;
+		xCinco = 1077;
+		yCinco = 492;
+		xSeis = 1054;
+		ySeis = 884;
+		xSiete = 641;
+		ySiete = 395;
+		xOcho = 621;
+		yOcho = 861;
 		// Boolean
 		animUno = false;
 		animDos = false;
@@ -69,28 +83,52 @@ public class Foto extends Thread {
 
 	// -----------------CALCULO DE LOS FRAMES DE LAS ANIMACIONES------------//
 	public void calculoAnimaciones() {
-		if(animUno)
-		calculoFotoUno();
-		if(animDos)
-		calculoFotoDos();
-		calculoFotoTres();
-		calculoFotoCuatro();
-		calculoFotoCinco();
-		calculoFotoSeis();
-		calculoFotoSiete();
-		calculoFotoOcho();
+		if (animUno)
+			calculoFotoUno();
+		if (animDos)
+			calculoFotoDos();
+		if (animTres)
+			calculoFotoTres();
+		if (animCuatro)
+			calculoFotoCuatro();
+		if (animCinco)
+			calculoFotoCinco();
+		if (animSeis)
+			calculoFotoSeis();
+		if (animSiete)
+			calculoFotoSiete();
+		if (animOcho)
+			calculoFotoOcho();
 	}
 
 	public void activarAnimaciones(PApplet app) {
 		this.app = app;
-		//Uno
+		// Uno
 		if (zonaUno(app.mouseX, app.mouseY)) {
 			animUno = true;
-			System.out.println("Activa animación Foto Uno");
+			//System.out.println("Activa animación Foto Uno");
 		}
-		//Uno
+		// Dos
 		if (zonaDos(app.mouseX, app.mouseY))
 			animDos = true;
+		// Tres
+		if (zonaTres(app.mouseX, app.mouseY))
+			animTres = true;
+		// Cuatro
+		if (zonaCuatro(app.mouseX, app.mouseY))
+			animCuatro = true;
+		// Cinco
+		if (zonaCinco(app.mouseX, app.mouseY))
+			animCinco = true;
+		// Seis
+		if (zonaSeisObjetivo(app.mouseX, app.mouseY))
+			animSeis = true;
+		// Siete
+		if (zonaSiete(app.mouseX, app.mouseY))
+			animSiete = true;
+		// Ocho
+		if (zonaOcho(app.mouseX, app.mouseY))
+			animOcho = true;
 	}
 
 	public void calculoFotoUno() {
@@ -109,43 +147,43 @@ public class Foto extends Thread {
 
 	public void calculoFotoTres() {
 		numTres++;
-		if (numTres >= fotoTres.length) {
-			numTres = fotoTres.length;
+		if (numTres >= fotoTres.length - 1) {
+			numTres = fotoTres.length - 1;
 		}
 	}
 
 	public void calculoFotoCuatro() {
 		numCuatro++;
-		if (numCuatro >= fotoCuatro.length) {
-			numCuatro = fotoCuatro.length;
+		if (/*PApplet.frameCount % 25 == 0 &&*/ numCuatro >= fotoCuatro.length - 1) {
+				numCuatro = 10;
 		}
 	}
 
 	public void calculoFotoCinco() {
 		numCinco++;
-		if (numCinco >= fotoCinco.length) {
-			numCinco = fotoCinco.length;
+		if (numCinco >= fotoCinco.length - 1) {
+			numCinco = fotoCinco.length - 1;
 		}
 	}
 
 	public void calculoFotoSeis() {
 		numSeis++;
-		if (numSeis >= fotoSeis.length) {
-			numSeis = fotoSeis.length;
+		if (numSeis >= fotoSeis.length - 1) {
+			numSeis = fotoSeis.length - 1;
 		}
 	}
 
 	public void calculoFotoSiete() {
 		numSiete++;
-		if (numSiete >= fotoSiete.length) {
-			numSiete = fotoSiete.length;
+		if (numSiete >= fotoSiete.length - 1) {
+			numSiete = fotoSiete.length - 1;
 		}
 	}
 
 	public void calculoFotoOcho() {
 		numOcho++;
-		if (numOcho >= fotoOcho.length) {
-			numOcho = fotoOcho.length;
+		if (numOcho >= fotoOcho.length - 1) {
+			numOcho = fotoOcho.length - 1;
 		}
 	}
 
@@ -173,40 +211,42 @@ public class Foto extends Thread {
 
 	public void animacionFotoUno(PApplet app) {
 		this.app = app;
-		//app.image(fotoUno[0], app.width / 2, app.height / 2);
-		//if (animUno)
-			app.image(fotoUno[numUno], app.width / 2, app.height / 2);
+		app.image(fotoUno[numUno], app.width / 2, app.height / 2);
 	}
 
 	public void animacionFotoDos(PApplet app) {
 		this.app = app;
-		app.image(fotoDos[0], app.width / 2, app.height / 2);
-		if (animDos)
-			app.image(fotoDos[numDos], app.width / 2, app.height / 2);
+		app.image(fotoDos[numDos], app.width / 2, app.height / 2);
 	}
 
 	public void animacionFotoTres(PApplet app) {
 		this.app = app;
+		app.image(fotoTres[numTres], app.width / 2, app.height / 2);
 	}
 
 	public void animacionFotoCuatro(PApplet app) {
 		this.app = app;
+		app.image(fotoCuatro[numCuatro], app.width / 2, app.height / 2);
 	}
 
 	public void animacionFotoCinco(PApplet app) {
 		this.app = app;
+		app.image(fotoCinco[numCinco], app.width / 2, app.height / 2);
 	}
 
 	public void animacionFotoSeis(PApplet app) {
 		this.app = app;
+		app.image(fotoSeis[numSeis], app.width / 2, app.height / 2);
 	}
 
 	public void animacionFotoSiete(PApplet app) {
 		this.app = app;
+		app.image(fotoSiete[numSiete], app.width / 2, app.height / 2);
 	}
 
 	public void animacionFotoOcho(PApplet app) {
 		this.app = app;
+		app.image(fotoOcho[numOcho], app.width / 2, app.height / 2);
 	}
 
 	public void click(PApplet app) {
@@ -225,32 +265,29 @@ public class Foto extends Thread {
 		return PApplet.dist(xDos, yDos, cx, cy) < 30;
 	}
 
-	public boolean zonaTres() {
-		return true;
+	public boolean zonaTres(int cx, int cy) {
+		return PApplet.dist(xTres, yTres, cx, cy) < 30;
 	}
 
-	public boolean zonaCuatro() {
-		return true;
+	public boolean zonaCuatro(int cx, int cy) {
+		return PApplet.dist(xCuatro, yCuatro, cx, cy) < 30;
 	}
 
-	public boolean zonaCinco() {
-		return true;
+	public boolean zonaCinco(int cx, int cy) {
+		return PApplet.dist(xCinco, yCinco, cx, cy) < 30;
 	}
 
-	public boolean zonaSeisObjetivo() {
-		return true;
+	public boolean zonaSeisObjetivo(int cx, int cy) {
+		return PApplet.dist(xSeis, ySeis, cx, cy) < 30;
 	}
 
-	public boolean zonaSiete() {
-		return true;
+	public boolean zonaSiete(int cx, int cy) {
+		return PApplet.dist(xSiete, ySiete, cx, cy) < 30;
 	}
 
-	public boolean zonaOcho() {
-		return true;
+	public boolean zonaOcho(int cx, int cy) {
+		return PApplet.dist(xOcho, yOcho, cx, cy) < 30;
 	}
 
-	public boolean zonaNueve() {
-		return true;
-	}
-
+	// -----------------------FINAL DE LA CLASE FOTO--------------------//
 }
