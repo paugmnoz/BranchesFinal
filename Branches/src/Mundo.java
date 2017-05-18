@@ -23,6 +23,7 @@ public class Mundo {
 	private Cajon cajonClase;
 	private PImage[] cargando, cajonFinal;
 	private PImage  insUno, insDos, insTres, insCuatro;
+	private Arbol arbol;
 	private Foto fotos;
 	private Pote pote;
 	private SelectorChamp selectorChamp;
@@ -69,10 +70,11 @@ public class Mundo {
 		champ = new ArrayList<Champinon>();
 		selectorChamp = new SelectorChamp(this, app.mouseX, app.mouseY, 150);
 		lib = new Libreta();
-		cajonClase = new Cajon(app, this);
-		cajonClase.start();
+		//cajonClase = new Cajon(app, this);
+		//cajonClase.start();
 		champPrin = new ChampinonPrin(app, app.width / 2 + 400, app.height / 2 - 50);
 		calaveritas = new ArrayList<Calaverita>();
+		arbol = new Arbol(this);
 		numFrame = 0;
 		pantalla = 0;
 
@@ -113,6 +115,7 @@ public class Mundo {
 		for (int i = 0; i < champ.size(); i++) {
 			if (PApplet.dist(app.mouseX, app.mouseY, champ.get(i).getX(), champ.get(i).getY()) < 30) {
 				selectorChamp.anadir(champ.get(i));
+				champ.remove(i);
 			}
 		}
 	}
@@ -134,7 +137,7 @@ public class Mundo {
 	}
 
 	public void pantallas(PApplet app) {
-		System.out.println(revUno);
+		System.out.println("Pantalla: " + pantalla);
 		instru.validarIns();
 		switch (pantalla) {
 		// ------------PANTALLA DE CARGA---------//
@@ -149,20 +152,20 @@ public class Mundo {
 			break;
 		// --------PANTALLA MESA FLOTANDO----------//
 		case 1:
-			cajonClase.pintarCajonFlotante();
+			//cajonClase.pintarCajonFlotante();
 			break;
 		//
 		case 2:
-			cajonClase.pintarAcercarCajon();
+			//cajonClase.pintarAcercarCajon();
 			break;
 		case 3:
 
 			switch (cajon) {
 			case 0:
-				cajonClase.pintarAbrir();
+				//cajonClase.pintarAbrir();
 				break;
 			case 1:
-				cajonClase.pintarAbrirCajon();
+				//cajonClase.pintarAbrirCajon();
 				if (numFrameAC >= 12) {
 					// liss.pintar(app);
 					// lib.pintar(app);
@@ -174,7 +177,7 @@ public class Mundo {
 			break;
 		// ------------------PANTALLA CALAVERITAS REV. UNO -------------------//
 		case 4:
-			cajonClase.setVivo(false);
+			//cajonClase.setVivo(false);
 
 			switch (revUno) {
 			case 0:
@@ -186,12 +189,12 @@ public class Mundo {
 
 			case 1:
 
-				pintarFondo();
+				//pintarFondo();
 				app.noStroke();
 				app.fill(221, 40, 47);
 				app.ellipse(eX, eY, 50, 50);
-				pintarCalaveritas();
-				avanzar(app);
+				//pintarCalaveritas();
+				//avanzar(app);
 
 				break;
 			}
@@ -206,6 +209,7 @@ public class Mundo {
 				if (app.frameCount % 450 == 0) {
 					revDos = 1;
 				}
+				arbol.pintar(app);
 				break;
 
 			case 1:
@@ -348,12 +352,13 @@ public class Mundo {
 			if (app.keyCode == 32) {
 				anadirChampinones();
 				pantalla = 5;
+				arbol.start();
 			}
 		}
 
 		// -----------------PANTALLA CHAMP. REV DOS----------------------//
 		else if (pantalla == 5) {
-			pote.mover();
+			pote.mover(app);
 
 			if (app.keyCode == 32) {
 				pantalla = 6;

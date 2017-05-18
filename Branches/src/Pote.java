@@ -54,7 +54,8 @@ public class Pote {
 	/*
 	 * Método para mover por la pantalla el pote
 	 */
-	public void mover() {
+	public void mover(PApplet app) {
+		this.app = app;
 		if (app.keyCode == app.RIGHT) {
 			x += 9;
 		}

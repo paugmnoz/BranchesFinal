@@ -8,7 +8,7 @@ public class Champinon implements Runnable {
 	private PApplet app;
 	private PImage champUno, champDos;
 	private int champ;
-	private float desfase;
+	private float desfaseX, desfaseY;
 	private Mundo m;
 
 	public Champinon(Mundo m, float x, float y) {
@@ -16,7 +16,8 @@ public class Champinon implements Runnable {
 		this.y = y;
 		this.m = m;
 		champ = (int) (1 + Math.random() * 2);
-		desfase = (float) (-20 + Math.random() * 80);
+		desfaseX = (float) (-20 + Math.random() * 80);
+		desfaseY = (float) (-20 + Math.random() * 80);
 		cargar();
 	}
 
@@ -66,13 +67,13 @@ public class Champinon implements Runnable {
 		switch (champ) {
 		case 1:
 			app.pushMatrix();
-			app.translate(x - desfase, y - desfase);
+			app.translate(x - desfaseX, y - desfaseY);
 			app.image(champUno, 0, 0, 20, 20);
 			app.popMatrix();
 			break;
 		case 2:
 			app.pushMatrix();
-			app.translate(x - desfase, y - desfase);
+			app.translate(x - desfaseX, y - desfaseY);
 			app.image(champDos, 0, 0, 20, 20);
 			app.popMatrix();
 			break;

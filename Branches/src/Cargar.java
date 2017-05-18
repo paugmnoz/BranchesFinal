@@ -8,6 +8,7 @@ public class Cargar extends Thread {
 	private PImage[] kuleshov;
 	private PImage[] abrir, revUnoF, cajonFlotante, abreCajon, acercaCajon;
 	private PImage champUno, champDos, pote, poteAtras, poteAdelante;
+	private PImage [] arbol;
 	private int champ;
 	private boolean cargado;
 	// Pantalla Fotos
@@ -16,8 +17,6 @@ public class Cargar extends Thread {
 
 	// Pantalla calaveritas
 	private PImage[] fondoUno, calaverasDer, calaverasIz;
-	
-
 
 	public Cargar(PApplet app) {
 		this.app = app;
@@ -27,16 +26,17 @@ public class Cargar extends Thread {
 	public void run() {
 		try {
 			sleep(15);
-			cargarKuleshov();
-			cargarCajonAbrir();
-			cargarFondo();
-			cargarCajonF();
-			cargarAbreCajon();
-			cargarAcercarCajon();
+			//cargarKuleshov();
+			// cargarCajonAbrir();
+			// cargarFondo();
+			// cargarCajonF();
+			// cargarAbreCajon();
+			// cargarAcercarCajon();
+			cargarArbol();
 			cargarChampinones();
 			cargarPote();
-			cargarFotos();
-			cargarFondoCalaveritas();
+		//	cargarFotos();
+		//	cargarFondoCalaveritas();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -48,12 +48,12 @@ public class Cargar extends Thread {
 		for (int i = 0; i < fondoUno.length; i++) {
 			fondoUno[i] = app.loadImage("../data/RevisionUno/RevisionUno_" + i + ".png");
 		}
-		
+
 		calaverasDer = new PImage[29];
 		for (int i = 0; i < calaverasDer.length; i++) {
 			calaverasDer[i] = app.loadImage("../data/CPerdilDere/CPerfilDere_" + i + ".png");
 		}
-		
+
 		calaverasIz = new PImage[29];
 		for (int i = 0; i < calaverasIz.length; i++) {
 			calaverasIz[i] = app.loadImage("../data/CPerfil Izq/CPerfilIzq_" + i + ".png");
@@ -97,6 +97,13 @@ public class Cargar extends Thread {
 	}
 
 	// -----------------PANTALLA CHAMP. REV DOS----------------------//
+	public void cargarArbol(){
+		arbol = new PImage[297];
+		for (int i = 0; i < arbol.length; i++) {
+			arbol[i] = app.loadImage("../data/PantallaArbol/arbolCorte_" + i + ".png");
+		}
+	}
+	
 	public void cargarChampinones() {
 		champUno = app.loadImage("../data/PantallaArbol/champUno.png");
 		champDos = app.loadImage("../data/PantallaArbol/champDos.png");
@@ -357,17 +364,25 @@ public class Cargar extends Thread {
 	public void setFotoOcho(PImage[] fotoOcho) {
 		this.fotoOcho = fotoOcho;
 	}
-	
+
 	public PImage[] getCalaverasDer() {
 		return calaverasDer;
 	}
-	
+
 	public PImage[] getCalaverasIz() {
 		return calaverasIz;
 	}
-	
+
 	public PImage[] getFondoUno() {
 		return fondoUno;
+	}
+
+	public PImage[] getArbol() {
+		return arbol;
+	}
+
+	public void setArbol(PImage[] arbol) {
+		this.arbol = arbol;
 	}
 
 	// --------------FINAL DE LA CLASE CARGAR------------//
