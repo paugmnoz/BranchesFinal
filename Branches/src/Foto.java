@@ -17,12 +17,13 @@ public class Foto extends Thread {
 			xOcho, yOcho;
 	private PImage fondo;
 
-	public Foto(Mundo m, float x, float y, float tam) {
+	public Foto(Mundo m, float x, float y, float tam, PApplet app) {
 		encontroLlave = false;
 		this.x = x;
 		this.y = y;
 		this.tam = tam;
 		this.m = m;
+		this.app = app;
 		vivo = true;
 		// llave = new Llave(m, 802, 547, 30);
 		cargarImagen();
@@ -42,22 +43,22 @@ public class Foto extends Thread {
 	}
 
 	public void iniciarVariables() {
-		xUno = 1889;
-		yUno = 1030;
-		xDos = 1899;
-		yDos = 600;
-		xTres = 1510;
-		yTres = 458;
-		xCuatro = 1449;
-		yCuatro = 883;
-		xCinco = 1077;
-		yCinco = 492;
-		xSeis = 1054;
-		ySeis = 884;
-		xSiete = 641;
-		ySiete = 395;
-		xOcho = 621;
-		yOcho = 861;
+		xUno = 1608;
+		yUno = 808;
+		xDos = 1576;
+		yDos = 413;
+		xTres = 1171;
+		yTres = 277;
+		xCuatro = 1119;
+		yCuatro = 679;
+		xCinco = 759;
+		yCinco = 311;
+		xSeis = 724;
+		ySeis = 681;
+		xSiete = 318;
+		ySiete = 216;
+		xOcho = 303;
+		yOcho = 667;
 		// Boolean
 		animUno = false;
 		animDos = false;
@@ -153,8 +154,9 @@ public class Foto extends Thread {
 	}
 
 	public void calculoFotoCuatro() {
+		if(app.frameCount % 10 == 0)
 		numCuatro++;
-		if (/*PApplet.frameCount % 25 == 0 &&*/ numCuatro >= fotoCuatro.length - 1) {
+		if (	numCuatro >= fotoCuatro.length - 1) {
 				numCuatro = 10;
 		}
 	}

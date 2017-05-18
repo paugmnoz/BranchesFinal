@@ -23,7 +23,7 @@ public class Cajon extends Thread {
 		abreCajon = m.getCargar().getAbreCajon();
 		acercaCajon = m.getCargar().getAcercaCajon();
 	}
-	
+
 	public void iniciarVariables() {
 		vivo = true;
 		pantalla = m.getPantalla();
@@ -42,9 +42,8 @@ public class Cajon extends Thread {
 		}
 	}
 
-
 	public void calculo() {
-		//System.out.println("Pantalla: " + m.getPantalla());
+		// System.out.println("Pantalla: " + m.getPantalla());
 		switch (m.getPantalla()) {
 		case 1:
 			calculoCajonFlotante();
@@ -130,4 +129,7 @@ public class Cajon extends Thread {
 		app.image(abrir[numFrameAbrir], app.width / 2, app.height / 2);
 	}
 
+	public void setVivo(boolean vivo) {
+		this.vivo = vivo;
+	}
 }

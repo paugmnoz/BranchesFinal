@@ -16,6 +16,8 @@ public class Cargar extends Thread {
 
 	// Pantalla calaveritas
 	private PImage[] fondoUno, calaverasDer, calaverasIz;
+	
+
 
 	public Cargar(PApplet app) {
 		this.app = app;
@@ -47,12 +49,12 @@ public class Cargar extends Thread {
 			fondoUno[i] = app.loadImage("../data/RevisionUno/RevisionUno_" + i + ".png");
 		}
 		
-		calaverasDer = new PImage[73];
+		calaverasDer = new PImage[29];
 		for (int i = 0; i < calaverasDer.length; i++) {
 			calaverasDer[i] = app.loadImage("../data/CPerdilDere/CPerfilDere_" + i + ".png");
 		}
 		
-		calaverasIz = new PImage[73];
+		calaverasIz = new PImage[29];
 		for (int i = 0; i < calaverasIz.length; i++) {
 			calaverasIz[i] = app.loadImage("../data/CPerfil Izq/CPerfilIzq_" + i + ".png");
 		}
@@ -108,9 +110,9 @@ public class Cargar extends Thread {
 
 	// -----------------------PANTALLA KULESHOV ------------------//
 	public void cargarKuleshov() {
-		kuleshov = new PImage[1];
+		kuleshov = new PImage[72];
 		for (int i = 0; i < kuleshov.length; i++) {
-			kuleshov[i] = app.loadImage("../data/kuleshov_prueba_" + i + ".png");
+			kuleshov[i] = app.loadImage("../data/VideoKule/VideoKule_" + i + ".png");
 		}
 	}
 

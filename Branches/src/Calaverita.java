@@ -11,25 +11,19 @@ public class Calaverita implements Runnable {
 	private boolean abrir;
 	private Mundo m;
 	private PApplet app;
+	private int numFrame;
 
 	public Calaverita(Mundo m, float x, float y) {
 		this.m = m;
 		this.x = x;
 		this.y = y;
 		cargarCalaverita();
+		numFrame= 0;
 	}
 
 	public void cargarCalaverita() {
 		m.getCargar().getCalaverasIz();
 		m.getCargar().getCalaverasDer();
-	}
-
-	/*
-	 * Metodo que cargara con un for las imagenes para la animacion de cuando se
-	 * abre la puertapara cambiar de pantalla
-	 */
-	private void cargarPuerta() {
-
 	}
 
 	/*
@@ -53,8 +47,13 @@ public class Calaverita implements Runnable {
 	 * Método que tendra un for que correrá las imágenes del arreglo y animará
 	 * el personaje
 	 */
-	public void animar() {
-
+	public void animarIz() {
+		if (app.frameCount % 5 == 0) {
+			numFrame++;
+			if (numFrame >= 28) {
+				numFrame = 0;
+			}
+		}
 	}
 
 	/*

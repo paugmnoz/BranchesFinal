@@ -13,7 +13,8 @@ public class BranchesMain extends PApplet {
 	
 	@Override
 	public void settings() {
-		fullScreen();
+		size(1920,1000);
+		//fullScreen();
 		
 	}
 	

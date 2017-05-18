@@ -18,5 +18,15 @@
 	<classpathentry kind="lib" path="Libs/jogl-all-natives-windows-i586.jar"/>
 	<classpathentry kind="lib" path="Libs/jogl-all.jar"/>
 	<classpathentry kind="lib" path="Libs/Kinect/SimpleOpenNI.jar"/>
+	<classpathentry kind="lib" path="Libs/serial/jssc.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="BranchesTemp/Libs/serial/windows64"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="Libs/serial/serial.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="BranchesTemp/Libs/serial"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
